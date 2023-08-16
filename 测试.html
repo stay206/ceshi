@@ -6,27 +6,7 @@
 	</head>
 	
     <style>
-       try {
-    var timer;
-    $("#form-iframe").load(function () {
-        if (timer) {
-            clearInterval(timer);
-        }
-        //pre_height用于记录上次检查时body的高度
-        //mainheight用于获取本次检查时body的高度，并赋予iframe的高度
-        var mainheight, pre_height;
-        var frame = $(this);
-        timer = setInterval(function () {
-            mainheight = $(document.body).height() + 10;
-            if (mainheight != pre_height) {
-                pre_height = mainheight;
-                frame.height(Math.max(mainheight, 350));
-            }
-        }, 500);//每0.5秒检查一次
-    });
-} catch (e) {
-}
-
+      
 
         </style>
         <body>
@@ -36,11 +16,14 @@
                 <a href="http://www.google.com" target="main">Google-2</a>
                 <a href="http://www.google.com" target="main">Google-3</a>
             </p>
-              <div class=" iframe My-home embed-responsive embed-responsive-16by9" id="taskheight">
-        <iframe class="embed-responsive-item" frameborder="0" height='100%' id="form-iframe" name="formIframe" src="https://stay206.github.io/xinfan/2023/10" scrolling="no" width='100%'></iframe>
- </div>
-
-           
+             
+            <iframe 
+            scrolling=“no”
+            framebordering='0'
+            src="https://stay206.github.io/xinfan/2023/10"
+            width="100%"
+            onload="this.height=this.contentWindow.document.documentElement.scrollHeight">
+         </iframe>
         
         </body>
         
