@@ -32,9 +32,9 @@
 
 
     <!-- 开始 -->
-    <section>
-        <div class="headerpage"></div>
-    </section>
+    <iframe scrolling=“no” framebordering='0' src="https://stay206.github.io/ceshi/header.html" width="100%"
+        onload="this.height=this.contentWindow.document.documentElement.scrollHeight">
+    </iframe>
     <section>
         <div class="ac_coupon-content">
             <div class="card">
@@ -1518,9 +1518,10 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="footerpage"></div>
-    </section>
+    
+    <iframe scrolling=“no” framebordering='0' src="https://stay206.github.io/ceshi/footer.html" width="100%"
+        onload="this.height=this.contentWindow.document.documentElement.scrollHeight">
+    </iframe>
     <script>
         $(function () {
             /*公共部分
@@ -1528,7 +1529,7 @@
              * footer CopyRight
              */
             $(".headerpage").load("https://stay206.github.io/ceshi/header.html");
-            $(".footerpage").load("https://stay206.github.io/ceshi/footer.html");
+            $(".footerpage").load("");
         });
     </script>
 
