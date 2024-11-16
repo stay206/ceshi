@@ -1,10 +1,20 @@
 /* 设置全局样式 */
 body {
     font-family: Arial, sans-serif;
-    font-size: 1rem;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+
+/* 针对不同浏览器的兼容性设置 */
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+body {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* 设置头部样式，包括背景渐变动画 */
@@ -69,6 +79,8 @@ header input {
     width: 200px;
     border: none;
     border-radius: 5px;
+    position: relative;
+    left: -30px; /* 向左移动20px */
 }
 
 /* 设置主要内容区域样式，添加顶部填充以避免内容被头部遮挡 */
@@ -87,9 +99,6 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     cursor: pointer; /* 添加鼠标指针样式 */
-    width: 600px; /* 固定宽度 */
-    margin-left: auto; /* 居中对齐 */
-    margin-right: auto; /* 居中对齐 */
 }
 
 /* 设置帖子图片样式 */
@@ -216,16 +225,22 @@ main {
 
 /* 设置返回顶部按钮样式 */
 .t-right-bar .t-bar-rocket {
-    background-image: url("https://stay206.github.io/xinfan/images/返回顶部.svg"); /* 按钮图标 */
-    background-position: 19px center;
+    background-image: url("https://stay206.github.io/xinfan/images/返回顶部.svg");
+    background-position: 10px center; /* 向左移动9px */
+}
+
+/* 设置支持按钮样式 */
+.t-right-bar .t-bar-support {
+    background-image: url("https://stay206.github.io/xinfan/images/18禁.svg"); /* 按钮图标 */
+    background-position: 10px center;
 }
 
 /* 页脚样式 */
 footer {
     background-color: #f4f4f4; /* 背景颜色改为#f4f4f4 */
     color: #888; /* 字体颜色改为灰色 */
-    text-align: left; /* 文本靠左对齐 */
-    padding: 20px;
+    text-align: center;
+    padding: 20px 0;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -236,7 +251,7 @@ footer .icons {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: flex-start; /* 图标靠左对齐 */
+    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -256,7 +271,7 @@ footer .copyright {
     margin: 0;
     font-size: 14px;
     display: flex;
-    justify-content: flex-start; /* 文本靠左对齐 */
+    justify-content: center;
     align-items: center;
 }
 
@@ -272,21 +287,4 @@ footer .copyright a {
 
 footer .copyright a:hover {
     color: #000; /* 鼠标移至时高亮字体 */
-}
-
-/* 媒体查询 */
-@media (max-width: 600px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .item {
-        flex: 1 1 100%;
-    }
-}
-
-@media (min-width: 600px) and (max-width: 1200px) {
-    .item {
-        flex: 1 1 45%;
-    }
 }
