@@ -183,19 +183,46 @@
             showPage('homePage');
         });
 
-        document.getElementById('messageForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            let username = document.getElementById('username').value;
-            let message = document.getElementById('message').value;
+        document.addEventListener('DOMContentLoaded', () => {
+            const messageForm = document.getElementById('messageForm');
+            const messageList = document.getElementById('messageList');
 
-            if (username && message) {
-                let messageList = document.getElementById('messageList');
-                let newMessage = document.createElement('li');
-                newMessage.textContent = username + ': ' + message;
-                messageList.appendChild(newMessage);
+            // 从本地存储加载留言
+            const loadMessages = () => {
+                const messages = JSON.parse(localStorage.getItem('messages')) || [];
+                messages.forEach(message => addMessageToDOM(message));
+            };
 
-                document.getElementById('messageForm').reset();
-            }
+            // 向本地存储保存留言
+            const saveMessage = (message) => {
+                const messages = JSON.parse(localStorage.getItem('messages')) || [];
+                messages.push(message);
+                localStorage.setItem('messages', JSON.stringify(messages));
+            };
+
+            // 向DOM添加留言
+            const addMessageToDOM = (message) => {
+                const li = document.createElement('li');
+                li.textContent = `${message.username}: ${message.message}`;
+                messageList.appendChild(li);
+            };
+
+            // 表单提交事件处理
+            messageForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                const message = document.getElementById('message').value;
+
+                if (username && message) {
+                    const newMessage = { username, message };
+                    addMessageToDOM(newMessage);
+                    saveMessage(newMessage);
+                    messageForm.reset();
+                }
+            });
+
+            // 加载留言
+            loadMessages();
         });
     </script>
 </body>
