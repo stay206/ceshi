@@ -1,23 +1,22 @@
-/* 设置全局样式 */
+/* 全局样式 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    overflow-x: hidden; /* 隐藏水平滚动条 */
+    overflow-x: hidden;
 }
 
-/* 针对不同浏览器的兼容性设置 */
+/* 隐藏不同浏览器的滚动条 */
 body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
 }
-
 body {
-    -ms-overflow-style: none; /* IE 10+ */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* 设置头部样式，包括背景渐变动画 */
+/* 头部样式，带有渐变背景动画 */
 header {
     background: linear-gradient(270deg, #ff7e5f, #feb47b);
     background-size: 400% 400%;
@@ -27,32 +26,30 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: fixed; /* 固定头部 */
+    position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; /* 确保头部在最上层 */
+    z-index: 1000;
 }
 
-/* 定义背景渐变动画 */
+/* 渐变动画关键帧 */
 @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* 设置头部标题样式 */
+/* 头部标题样式 */
 header h1 {
     margin: 0;
     padding: 0;
 }
 
-/* 设置导航栏样式 */
+/* 导航栏样式 */
 nav {
     display: flex;
     align-items: center;
 }
-
-/* 设置导航链接样式 */
 nav a {
     color: #f2f2f2;
     text-align: center;
@@ -60,35 +57,31 @@ nav a {
     text-decoration: none;
     font-size: 17px;
 }
-
-/* 设置导航链接悬停样式 */
 nav a:hover {
     background-color: #feb47b;
     color: black;
 }
-
-/* 设置导航链接激活样式 */
 nav a.active {
     background-color: #ff7e5f;
     color: white;
 }
 
-/* 设置搜索框样式 */
+/* 搜索输入框样式 */
 header input {
     padding: 5px;
     width: 200px;
     border: none;
     border-radius: 5px;
     position:relative;
-    left: -30px; /* 使用margin-left代替position */
+    left: -30px;
 }
 
-/* 设置主要内容区域样式，添加顶部填充以避免内容被头部遮挡 */
+/* 主内容区域样式，包含顶部填充 */
 main {
-    padding: 80px 20px 20px; /* 添加顶部填充 */
+    padding: 80px 20px 20px;
 }
 
-/* 设置帖子容器样式 */
+/* 帖子容器样式 */
 .post {
     display: flex;
     align-items: flex-start;
@@ -98,10 +91,10 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    cursor: pointer; /* 添加鼠标指针样式 */
+    cursor: pointer;
 }
 
-/* 设置帖子图片样式 */
+/* 帖子图片样式 */
 .post img {
     width: 130px;
     height: 190px;
@@ -109,47 +102,51 @@ main {
     border-radius: 5px;
 }
 
-/* 设置帖子内容区域样式 */
+/* 帖子内容区域样式 */
 .post-content {
     flex: 1;
 }
 
-/* 设置帖子标题样式 */
+/* 帖子标题样式 */
 .post-title {
     display: flex;
     align-items: center;
 }
-
-/* 设置帖子主标题样式 */
 .post-title h2 {
     margin: 0;
     margin-right: 10px;
 }
-
-/* 设置帖子副标题样式 */
 .post-title h3 {
     margin: 0;
-    font-size: 0.9em; /* 增加字体大小 */
-    color: #666; /* 调整颜色 */
+    font-size: 0.9em;
+    color: #666;
 }
 
-/* 设置帖子发布日期样式 */
-.post-date {
-    position: absolute;
-    bottom: 10px;
-    right: 20px;
+/* 帖子标签样式，调整到图片旁边并底部对齐 */
+.post-tags {
+    align-self: flex-end; /* 与图片底部对齐 */
+    margin-left: 20px; /* 右侧间距 */
     font-size: 0.8em;
     color: #888;
 }
 
-/* 设置分页容器样式 */
+/* 标签的椭圆外框样式 */
+.post-tags .tag {
+    display: inline-block; /* 使标签成为行内块元素 */
+    padding: 5px 10px; /* 内边距，调整椭圆形状 */
+    border: 1px solid #888; /* 边框颜色与标签文字颜色相同 */
+    border-radius: 15px; /* 圆角边框，形成椭圆 */
+    margin-right: 5px; /* 标签之间的间距 */
+    font-size: 0.8em;
+    color: #888;
+}
+
+/* 分页容器样式 */
 .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-
-/* 设置分页按钮样式 */
 .pagination button {
     padding: 10px;
     margin: 0 5px;
@@ -158,30 +155,26 @@ main {
     color: #fff;
     cursor: pointer;
 }
-
-/* 设置禁用分页按钮样式 */
 .pagination button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-/* 设置禁用分页按钮容器样式 */
+/* 禁用分页按钮容器样式 */
 .disable-pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-
-/* 设置禁用分页按钮样式 */
 .disable-pagination button {
     padding: 10px;
     border: none;
-    background-color: #808080; /* 灰色 */
+    background-color: #808080;
     color: #fff;
     cursor: pointer;
 }
 
-/* 设置右下角工具栏样式 */
+/* 右侧工具栏样式 */
 .t-right-bar {
     position: fixed;
     right: 0;
@@ -191,8 +184,6 @@ main {
     z-index: 1000;
     cursor: pointer;
 }
-
-/* 设置右下角工具栏按钮样式 */
 .t-right-bar>div {
     float: left;
     height: 36px;
@@ -210,8 +201,6 @@ main {
     background-position: 12px center;
     transition: transform .2s cubic-bezier(.215, .61, .355, 1), padding .2s cubic-bezier(.215, .61, .355, 1), margin .2s cubic-bezier(.215, .61, .355, 1), background-color .2s cubic-bezier(.215, .61, .355, 1);
 }
-
-/* 设置右下角工具栏按钮悬停和激活样式 */
 .t-right-bar>div.active,
 .t-right-bar>div:hover {
     transform: translateX(-100%);
@@ -222,30 +211,25 @@ main {
     text-decoration: none;
     color: #fff;
 }
-
-/* 设置返回顶部按钮样式 */
 .t-right-bar .t-bar-rocket {
     background-image: url("https://stay206.github.io/xinfan/images/返回顶部.svg");
-    background-position: 10px center; /* 向左移动9px */
+    background-position: 10px center;
 }
-
-/* 设置支持按钮样式 */
 .t-right-bar .t-bar-support {
-    background-image: url("https://stay206.github.io/xinfan/images/18禁.svg"); /* 按钮图标 */
+    background-image: url("https://stay206.github.io/xinfan/images/18禁.svg");
     background-position: 10px center;
 }
 
 /* 页脚样式 */
 footer {
-    background-color: #f4f4f4; /* 背景颜色改为#f4f4f4 */
-    color: #888; /* 字体颜色改为灰色 */
+    background-color: #f4f4f4;
+    color: #888;
     text-align: center;
     padding: 20px 0;
     position: relative;
     bottom: 0;
     width: 100%;
 }
-
 footer .icons {
     list-style: none;
     padding: 0;
@@ -254,17 +238,14 @@ footer .icons {
     justify-content: center;
     margin-bottom: 10px;
 }
-
 footer .icons li {
     margin: 0 10px;
 }
-
 footer .icons a {
-    color: #888; /* 链接颜色改为灰色 */
+    color: #888;
     text-decoration: none;
     font-size: 24px;
 }
-
 footer .copyright {
     list-style: none;
     padding: 0;
@@ -274,22 +255,19 @@ footer .copyright {
     justify-content: center;
     align-items: center;
 }
-
 footer .copyright li {
     margin: 0 5px;
 }
-
 footer .copyright a {
-    color: #888; /* 链接颜色改为灰色 */
-    text-decoration: none; /* 删除下划线 */
-    transition: color 0.3s; /* 添加过渡效果 */
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s;
 }
-
 footer .copyright a:hover {
-    color: #000; /* 鼠标移至时高亮字体 */
+    color: #000;
 }
 
-/* 隐藏帖子 */
+/* 隐藏的帖子样式 */
 .hidden {
     display: none;
 }
