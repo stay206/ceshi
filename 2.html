@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>论坛</title>
     <style>
+        /* 设置全局样式 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -12,6 +13,7 @@
             background-color: #f4f4f4;
         }
 
+        /* 设置头部样式，包括背景渐变动画 */
         header {
             background: linear-gradient(270deg, #ff7e5f, #feb47b);
             background-size: 400% 400%;
@@ -21,24 +23,32 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: fixed; /* 固定头部 */
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* 确保头部在最上层 */
         }
 
+        /* 定义背景渐变动画 */
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        /* 设置头部标题样式 */
         header h1 {
             margin: 0;
             padding: 0;
         }
 
+        /* 设置导航栏样式 */
         nav {
             display: flex;
             align-items: center;
         }
 
+        /* 设置导航链接样式 */
         nav a {
             color: #f2f2f2;
             text-align: center;
@@ -47,16 +57,19 @@
             font-size: 17px;
         }
 
+        /* 设置导航链接悬停样式 */
         nav a:hover {
             background-color: #ddd;
             color: black;
         }
 
+        /* 设置导航链接激活样式 */
         nav a.active {
             background-color: #04AA6D;
             color: white;
         }
 
+        /* 设置搜索框样式 */
         header input {
             padding: 5px;
             width: 200px;
@@ -64,10 +77,12 @@
             border-radius: 5px;
         }
 
+        /* 设置主要内容区域样式，添加顶部填充以避免内容被头部遮挡 */
         main {
-            padding: 20px;
+            padding: 80px 20px 20px; /* 添加顶部填充 */
         }
 
+        /* 设置帖子容器样式 */
         .post {
             display: flex;
             align-items: flex-start;
@@ -77,8 +92,10 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
+            cursor: pointer; /* 添加鼠标指针样式 */
         }
 
+        /* 设置帖子图片样式 */
         .post img {
             width: 130px;
             height: 190px;
@@ -86,26 +103,31 @@
             border-radius: 5px;
         }
 
+        /* 设置帖子内容区域样式 */
         .post-content {
             flex: 1;
         }
 
+        /* 设置帖子标题样式 */
         .post-title {
             display: flex;
             align-items: center;
         }
 
+        /* 设置帖子主标题样式 */
         .post-title h2 {
             margin: 0;
             margin-right: 10px;
         }
 
+        /* 设置帖子副标题样式 */
         .post-title h3 {
             margin: 0;
             font-size: 0.8em;
             color: #888;
         }
 
+        /* 设置帖子发布日期样式 */
         .post-date {
             position: absolute;
             bottom: 10px;
@@ -114,12 +136,14 @@
             color: #888;
         }
 
+        /* 设置分页容器样式 */
         .pagination {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
 
+        /* 设置分页按钮样式 */
         .pagination button {
             padding: 10px;
             margin: 0 5px;
@@ -129,17 +153,20 @@
             cursor: pointer;
         }
 
+        /* 设置禁用分页按钮样式 */
         .pagination button.disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
 
+        /* 设置禁用分页按钮容器样式 */
         .disable-pagination {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
 
+        /* 设置禁用分页按钮样式 */
         .disable-pagination button {
             padding: 10px;
             border: none;
@@ -148,6 +175,7 @@
             cursor: pointer;
         }
 
+        /* 设置右下角工具栏样式 */
         .t-right-bar {
             position: fixed;
             right: 0;
@@ -158,6 +186,7 @@
             cursor: pointer;
         }
 
+        /* 设置右下角工具栏按钮样式 */
         .t-right-bar>div {
             float: left;
             height: 36px;
@@ -176,6 +205,7 @@
             transition: transform .2s cubic-bezier(.215, .61, .355, 1), padding .2s cubic-bezier(.215, .61, .355, 1), margin .2s cubic-bezier(.215, .61, .355, 1), background-color .2s cubic-bezier(.215, .61, .355, 1);
         }
 
+        /* 设置右下角工具栏按钮悬停和激活样式 */
         .t-right-bar>div.active,
         .t-right-bar>div:hover {
             transform: translateX(-100%);
@@ -187,6 +217,7 @@
             color: #fff;
         }
 
+        /* 设置返回顶部按钮样式 */
         .t-right-bar .t-bar-rocket {
             background-image: url("https://stay206.github.io/xinfan/images/返回顶部.svg"); /* 按钮图标 */
             background-position: 19px center;
@@ -194,6 +225,7 @@
     </style>
 </head>
 <body>
+    <!-- 头部，包含标题、导航栏和搜索框 -->
     <header>
         <h1>论坛</h1>
         <nav>
@@ -203,6 +235,7 @@
         </nav>
         <input type="text" id="search" placeholder="搜索...">
     </header>
+    <!-- 主要内容区域，包含帖子 -->
     <main id="posts-container">
         <div class="post" data-title="第一篇帖子" data-date="2024-11-16">
             <img src="https://via.placeholder.com/100" alt="帖子图片">
@@ -215,11 +248,11 @@
                 <div class="post-date">发布时间：2024-11-16</div>
             </div>
         </div>
-        <div class="post" data-title="第二篇帖子" data-date="2024-11-15">
+        <div class="post" data-title="妻、小学生になる。妻子变成小学生。" data-date="2024-11-15">
             <img src="https://via.placeholder.com/100" alt="帖子图片">
             <div class="post-content">
                 <div class="post-title">
-                    <h2>第二篇帖子</h2>
+                    <h2>666</h2>
                     <h3>第二篇帖子的副标题</h3>
                 </div>
                 <p>这是第二篇帖子的内容。</p>
@@ -228,11 +261,13 @@
         </div>
         <!-- 根据需要添加更多帖子 -->
     </main>
+    <!-- 分页容器 -->
     <div class="pagination" id="pagination"></div>
+    <!-- 禁用分页按钮 -->
     <div class="disable-pagination">
         <button id="disable-pagination-btn">禁用分页</button>
     </div>
-    <!-- 右下角 -->
+    <!-- 右下角工具栏，包含返回顶部按钮 -->
     <div class="t-right-bar">
         <div class="t-bar-rocket" id="back-to-top" onClick="gotop()">返回顶部</div>
     </div>
@@ -317,6 +352,15 @@
         function gotop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // 为每个帖子添加点击事件
+        document.querySelectorAll('.post').forEach(post => {
+            post.addEventListener('click', function() {
+                alert('你点击了帖子：' + post.getAttribute('data-title'));
+                // 这里可以添加更多操作，例如跳转到帖子详情页
+                // window.location.href = '帖子详情页URL';
+            });
+        });
 
         // 页面加载时调用排序和分页函数
         sortPostsByDate();
