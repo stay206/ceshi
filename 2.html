@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBS Forum</title>
+    <title>论坛</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,23 +13,46 @@
         }
 
         header {
-            background-color: #333;
             color: #fff;
             padding: 10px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
 
         header h1 {
             margin: 0;
             padding: 0;
-            flex: 1;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        nav a.active {
+            background-color: #04AA6D;
+            color: white;
         }
 
         header input {
             padding: 5px;
-            width: 80%;
-            max-width: 400px;
+            width: 200px;
+            border: none;
+            border-radius: 5px;
         }
 
         main {
@@ -56,6 +79,22 @@
 
         .post-content {
             flex: 1;
+        }
+
+        .post-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-title h2 {
+            margin: 0;
+            margin-right: 10px;
+        }
+
+        .post-title h3 {
+            margin: 0;
+            font-size: 0.8em;
+            color: #888;
         }
 
         .post-date {
@@ -85,162 +124,138 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+
+        .disable-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .disable-pagination button {
+            padding: 10px;
+            border: none;
+            background-color: #808080; /* 灰色 */
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .t-right-bar {
+            position: fixed;
+            right: 0;
+            bottom: 10%;
+            width: 48px;
+            height: 48px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .t-right-bar>div {
+            float: left;
+            height: 36px;
+            margin-bottom: 1px;
+            border-radius: 20px 0 0 20px;
+            color: #fff;
+            padding-left: 100%;
+            clear: both;
+            white-space: nowrap;
+            font-size: 13px;
+            line-height: 36px;
+            font-style: normal;
+            background-color: #aaa;
+            background-repeat: no-repeat;
+            background-position: 12px center;
+            transition: transform .2s cubic-bezier(.215, .61, .355, 1), padding .2s cubic-bezier(.215, .61, .355, 1), margin .2s cubic-bezier(.215, .61, .355, 1), background-color .2s cubic-bezier(.215, .61, .355, 1);
+        }
+
+        .t-right-bar>div.active,
+        .t-right-bar>div:hover {
+            transform: translateX(-100%);
+            padding-left: 45px;
+            padding-right: 10px;
+            margin-left: 48px;
+            background-color: #23a0e1;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .t-right-bar .t-bar-rocket {
+            background-image: url("https://stay206.github.io/xinfan/images/返回顶部.svg"); /* 按钮图标 */
+            background-position: 19px center;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>BBS Forum</h1>
-        <input type="text" id="search" placeholder="Search...">
+    <header id="header">
+        <h1>论坛</h1>
+        <nav>
+            <a href="#home" class="active">首页</a>
+            <a href="#about">关于</a>
+            <a href="#contact">联系</a>
+        </nav>
+        <input type="text" id="search" placeholder="搜索...">
     </header>
     <main id="posts-container">
-        <div class="post" data-title="First Post" data-date="2024-11-16">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
+        <div class="post" data-title="第一篇帖子" data-date="2024-11-16">
+            <img src="https://via.placeholder.com/100" alt="帖子图片">
             <div class="post-content">
-                <h2>First Post</h2>
-                <p>This is the content of the first post.</p>
-                <div class="post-date">Published on: 2024-11-16</div>
+                <div class="post-title">
+                    <h2>第一篇帖子</h2>
+                    <h3>第一篇帖子的副标题</h3>
+                </div>
+                <p>这是第一篇帖子的内容。</p>
+                <div class="post-date">发布时间：2024-11-16</div>
             </div>
         </div>
-        <div class="post" data-title="Second Post" data-date="2024-11-15">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
+        <div class="post" data-title="第二篇帖子" data-date="2024-11-15">
+            <img src="https://via.placeholder.com/100" alt="帖子图片">
             <div class="post-content">
-                <h2>Second Post</h2>
-                <p>This is the content of the second post.</p>
-                <div class="post-date">Published on: 2024-11-15</div>
+                <div class="post-title">
+                    <h2>第二篇帖子</h2>
+                    <h3>第二篇帖子的副标题</h3>
+                </div>
+                <p>这是第二篇帖子的内容。</p>
+                <div class="post-date">发布时间：2024-11-15</div>
             </div>
         </div>
-        <!-- Add more posts as needed -->
-        <div class="post" data-title="Third Post" data-date="2024-11-14">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Third Post</h2>
-                <p>This is the content of the third post.</p>
-                <div class="post-date">Published on: 2024-11-14</div>
-            </div>
-        </div>
-        <div class="post" data-title="Fourth Post" data-date="2024-11-13">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Fourth Post</h2>
-                <p>This is the content of the fourth post.</p>
-                <div class="post-date">Published on: 2024-11-13</div>
-            </div>
-        </div>
-        <div class="post" data-title="Fifth Post" data-date="2024-11-12">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Fifth Post</h2>
-                <p>This is the content of the fifth post.</p>
-                <div class="post-date">Published on: 2024-11-12</div>
-            </div>
-        </div>
-        <div class="post" data-title="Sixth Post" data-date="2024-11-11">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Sixth Post</h2>
-                <p>This is the content of the sixth post.</p>
-                <div class="post-date">Published on: 2024-11-11</div>
-            </div>
-        </div>
-        <div class="post" data-title="Seventh Post" data-date="2024-11-10">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Seventh Post</h2>
-                <p>This is the content of the seventh post.</p>
-                <div class="post-date">Published on: 2024-11-10</div>
-            </div>
-        </div>
-        <div class="post" data-title="Eighth Post" data-date="2024-11-09">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Eighth Post</h2>
-                <p>This is the content of the eighth post.</p>
-                <div class="post-date">Published on: 2024-11-09</div>
-            </div>
-        </div>
-        <div class="post" data-title="Ninth Post" data-date="2024-11-08">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Ninth Post</h2>
-                <p>This is the content of the ninth post.</p>
-                <div class="post-date">Published on: 2024-11-08</div>
-            </div>
-        </div>
-        <div class="post" data-title="Tenth Post" data-date="2024-11-07">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Tenth Post</h2>
-                <p>This is the content of the tenth post.</p>
-                <div class="post-date">Published on: 2024-11-07</div>
-            </div>
-        </div>
-        <div class="post" data-title="Third Post" data-date="2024-11-14">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Third Post</h2>
-                <p>This is the content of the third post.</p>
-                <div class="post-date">Published on: 2024-11-14</div>
-            </div>
-        </div>
-        <div class="post" data-title="Fourth Post" data-date="2024-11-13">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Fourth Post</h2>
-                <p>This is the content of the fourth post.</p>
-                <div class="post-date">Published on: 2024-11-13</div>
-            </div>
-        </div>
-        <div class="post" data-title="Fifth Post" data-date="2024-11-12">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Fifth Post</h2>
-                <p>This is the content of the fifth post.</p>
-                <div class="post-date">Published on: 2024-11-12</div>
-            </div>
-        </div>
-        <div class="post" data-title="Sixth Post" data-date="2024-11-11">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Sixth Post</h2>
-                <p>This is the content of the sixth post.</p>
-                <div class="post-date">Published on: 2024-11-11</div>
-            </div>
-        </div>
-        <div class="post" data-title="Seventh Post" data-date="2024-11-10">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Seventh Post</h2>
-                <p>This is the content of the seventh post.</p>
-                <div class="post-date">Published on: 2024-11-10</div>
-            </div>
-        </div>
-        <div class="post" data-title="Eighth Post" data-date="2024-11-09">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Eighth Post</h2>
-                <p>This is the content of the eighth post.</p>
-                <div class="post-date">Published on: 2024-11-09</div>
-            </div>
-        </div>
-        <div class="post" data-title="Ninth Post" data-date="2024-11-08">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Ninth Post</h2>
-                <p>This is the content of the ninth post.</p>
-                <div class="post-date">Published on: 2024-11-08</div>
-            </div>
-        </div>
-        <div class="post" data-title="Tenth Post" data-date="2024-11-07">
-            <img src="https://via.placeholder.com/100" alt="Post Image">
-            <div class="post-content">
-                <h2>Tenth Post</h2>
-                <p>This is the content of the tenth post.</p>
-                <div class="post-date">Published on: 2024-11-07</div>
-            </div>
-        </div>
+        <!-- 根据需要添加更多帖子 -->
     </main>
     <div class="pagination" id="pagination"></div>
+    <div class="disable-pagination">
+        <button id="disable-pagination-btn">禁用分页</button>
+    </div>
+    <!-- 右下角 -->
+    <div class="t-right-bar">
+        <div class="t-bar-rocket" id="back-to-top" onClick="gotop()">返回顶部</div>
+    </div>
+    <!-- 右下角 end -->
     <script>
+        // 生成随机颜色
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // 设置随机渐变背景
+        function setRandomGradient(element) {
+            const color1 = getRandomColor();
+            const color2 = getRandomColor();
+            const color3 = getRandomColor();
+            element.style.background = `linear-gradient(270deg, ${color1}, ${color2}, ${color3})`;
+            element.style.backgroundSize = '400% 400%';
+            element.style.animation = 'gradient 15s ease infinite';
+        }
+
+        // 初始化随机渐变背景
+        function initRandomGradient() {
+            const header = document.getElementById('header');
+            setRandomGradient(header);
+        }
+
+        // 搜索功能：根据输入框的值过滤帖子
         document.getElementById('search').addEventListener('input', function() {
             let filter = this.value.toLowerCase();
             let posts = document.querySelectorAll('.post');
@@ -255,6 +270,7 @@
             });
         });
 
+        // 按日期排序帖子
         function sortPostsByDate() {
             let postsContainer = document.getElementById('posts-container');
             let posts = Array.from(postsContainer.getElementsByClassName('post'));
@@ -268,9 +284,11 @@
             posts.forEach(post => postsContainer.appendChild(post));
         }
 
+        // 分页功能：将帖子分页显示
         function paginatePosts() {
             const postsPerPage = 10;
             const postsContainer = document.getElementById('posts-container');
+            const posts = Array.from(postsContainer.get            const postsContainer = document.getElementById('posts-container');
             const posts = Array.from(postsContainer.getElementsByClassName('post'));
             const pagination = document.getElementById('pagination');
             const totalPages = Math.ceil(posts.length / postsPerPage);
@@ -285,7 +303,10 @@
                     const button = document.createElement('button');
                     button.textContent = i;
                     button.classList.toggle('disabled', i === page);
-                    button.addEventListener('click', () => showPage(i));
+                    button.addEventListener('click', () => {
+                        showPage(i);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
                     pagination.appendChild(button);
                 }
             }
@@ -293,9 +314,32 @@
             showPage(1);
         }
 
-        // Call the functions to sort posts and paginate on page load
+        // 禁用分页功能：切换分页功能的启用和禁用
+        let paginationDisabled = false;
+
+        document.getElementById('disable-pagination-btn').addEventListener('click', function() {
+            const posts = document.querySelectorAll('.post');
+            if (!paginationDisabled) {
+                posts.forEach(post => post.style.display = '');
+                document.getElementById('pagination').style.display = 'none';
+                this.textContent = '启用分页';
+            } else {
+                paginatePosts();
+                document.getElementById('pagination').style.display = 'flex';
+                this.textContent = '禁用分页';
+            }
+            paginationDisabled = !paginationDisabled;
+        });
+
+        // 返回顶部功能：平滑滚动回到页面顶部
+        function gotop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 页面加载时调用排序和分页函数
         sortPostsByDate();
         paginatePosts();
+        initRandomGradient();
     </script>
 </body>
 </html>
