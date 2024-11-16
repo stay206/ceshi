@@ -85,6 +85,10 @@
             cursor: pointer;
         }
     </style>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 </head>
 <body>
     <div class="container">
@@ -138,6 +142,49 @@
         </main>
     </div>
     <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const messageForm = document.getElementById('messageForm');
+        const messageList = document.getElementById('messageList');
+        const db = firebase.database().ref('messages');
+
+        // Load messages from Firebase
+        db.on('child_added', (snapshot) => {
+            const message = snapshot.val();
+            addMessageToDOM(message);
+        });
+
+        // Add message to Firebase
+        messageForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const message = document.getElementById('message').value;
+
+            if (username && message) {
+                const newMessage = { username, message };
+                db.push(newMessage);
+                messageForm.reset();
+            }
+        });
+
+        // Add message to DOM
+        function addMessageToDOM(message) {
+            const li = document.createElement('li');
+            li.textContent = `${message.username}: ${message.message}`;
+            messageList.appendChild(li);
+        }
+
         document.getElementById('searchInput').addEventListener('keyup', function() {
             let filter = this.value.toLowerCase();
             let posts = document.querySelectorAll('#postList .post');
@@ -181,48 +228,6 @@
             event.preventDefault();
             alert('Registered!');
             showPage('homePage');
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const messageForm = document.getElementById('messageForm');
-            const messageList = document.getElementById('messageList');
-
-            // 从本地存储加载留言
-            const loadMessages = () => {
-                const messages = JSON.parse(localStorage.getItem('messages')) || [];
-                messages.forEach(message => addMessageToDOM(message));
-            };
-
-            // 向本地存储保存留言
-            const saveMessage = (message) => {
-                const messages = JSON.parse(localStorage.getItem('messages')) || [];
-                messages.push(message);
-                localStorage.setItem('messages', JSON.stringify(messages));
-            };
-
-            // 向DOM添加留言
-            const addMessageToDOM = (message) => {
-                const li = document.createElement('li');
-                li.textContent = `${message.username}: ${message.message}`;
-                messageList.appendChild(li);
-            };
-
-            // 表单提交事件处理
-            messageForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const username = document.getElementById('username').value;
-                const message = document.getElementById('message').value;
-
-                if (username && message) {
-                    const newMessage = { username, message };
-                    addMessageToDOM(newMessage);
-                    saveMessage(newMessage);
-                    messageForm.reset();
-                }
-            });
-
-            // 加载留言
-            loadMessages();
         });
     </script>
 </body>
