@@ -70,11 +70,9 @@
             margin: 5px 0;
         }
 
-        form input, form textarea {
+        form input {
             padding: 10px;
             margin-bottom: 10px;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         form button {
@@ -85,10 +83,6 @@
             cursor: pointer;
         }
     </style>
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 </head>
 <body>
     <div class="container">
@@ -103,13 +97,6 @@
         </header>
         <main>
             <div id="homePage">
-                <form id="messageForm">
-                    <label for="username">用户名:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="message">留言:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <button type="submit">提交</button>
-                </form>
                 <ul id="postList">
                     <li class="post">Post 1: Welcome to the forum!</li>
                     <li class="post">Post 2: How to learn JavaScript?</li>
@@ -117,7 +104,6 @@
                     <li class="post">Post 4: Tips for CSS styling</li>
                     <li class="post">Post 5: Frontend development resources</li>
                 </ul>
-                <ul id="messageList"></ul>
             </div>
             <div id="loginPage" class="hidden">
                 <h2>Login</h2>
@@ -142,49 +128,6 @@
         </main>
     </div>
     <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        const messageForm = document.getElementById('messageForm');
-        const messageList = document.getElementById('messageList');
-        const db = firebase.database().ref('messages');
-
-        // Load messages from Firebase
-        db.on('child_added', (snapshot) => {
-            const message = snapshot.val();
-            addMessageToDOM(message);
-        });
-
-        // Add message to Firebase
-        messageForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const message = document.getElementById('message').value;
-
-            if (username && message) {
-                const newMessage = { username, message };
-                db.push(newMessage);
-                messageForm.reset();
-            }
-        });
-
-        // Add message to DOM
-        function addMessageToDOM(message) {
-            const li = document.createElement('li');
-            li.textContent = `${message.username}: ${message.message}`;
-            messageList.appendChild(li);
-        }
-
         document.getElementById('searchInput').addEventListener('keyup', function() {
             let filter = this.value.toLowerCase();
             let posts = document.querySelectorAll('#postList .post');
