@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>论坛</title>
+    <title>墨云新番表</title>
     <style>
+         iframe {
+        border: none;
+    }
         /* 设置全局样式 */
         body {
             font-family: Arial, sans-serif;
@@ -59,13 +62,13 @@
 
         /* 设置导航链接悬停样式 */
         nav a:hover {
-            background-color: #ddd;
+            background-color: #feb47b;
             color: black;
         }
 
         /* 设置导航链接激活样式 */
         nav a.active {
-            background-color: #04AA6D;
+            background-color: #ff7e5f;
             color: white;
         }
 
@@ -225,9 +228,13 @@
     </style>
 </head>
 <body>
+    <iframe scrolling=“no” framebordering='0' src="https://stay206.github.io/xinfan/2023/header.html" width="100%"
+        onload="this.height=this.contentWindow.document.documentElement.scrollHeight">
+    </iframe>
+    
     <!-- 头部，包含标题、导航栏和搜索框 -->
     <header>
-        <h1>论坛</h1>
+        <h1>墨云新番表</h1>
         <nav>
             <a href="#home" class="active">首页</a>
             <a href="#about">关于</a>
@@ -237,26 +244,26 @@
     </header>
     <!-- 主要内容区域，包含帖子 -->
     <main id="posts-container">
-        <div class="post" data-title="第一篇帖子" data-date="2024-11-16" data-id="1">
-            <img src="https://via.placeholder.com/100" alt="帖子图片">
+        <div class="post" data-title="电影 闪电十一人总集篇 传说的开球/映画 イナズマイレブン総集編 伝説のキックオフ" data-date="2024-12-27" data-link="https://bgm.tv/subject/510788">
+            <img src="https://lain.bgm.tv/r/400/pic/cover/l/dd/97/510788_nGBz3.jpg" alt="帖子图片">
             <div class="post-content">
                 <div class="post-title">
-                    <h2>第一篇帖子</h2>
-                    <h3>第一篇帖子的副标题</h3>
+                    <h2>电影 闪电十一人总集篇 传说的开球</h2>
+                    <h3>映画 イナズマイレブン総集編 伝説のキックオフ</h3>
                 </div>
-                <p>这是第一篇帖子的内容。</p>
-                <div class="post-date">发布时间：2024-11-16</div>
+                <p>1话 / 2024年12月27日/电影</p>
+                <div class="post-date">更新时间：2024-11-16</div>
             </div>
         </div>
-        <div class="post" data-title="妻、小学生になる。妻子变成小学生。" data-date="2024-11-15" data-id="2">
-            <img src="https://via.placeholder.com/100" alt="帖子图片">
+        <div class="post" data-title="剧场版 闪电十一人 新英雄的序章/劇場版 イナズマイレブン 新たなる英雄たちの序章" data-date="2024-11-15" data-link="https://bgm.tv/subject/510789">
+            <img src="https://lain.bgm.tv/r/400/pic/cover/l/38/9a/510789_gR1Qr.jpg" alt="帖子图片">
             <div class="post-content">
                 <div class="post-title">
-                    <h2>666</h2>
-                    <h3>第二篇帖子的副标题</h3>
+                    <h2>剧场版 闪电十一人 新英雄的序章</h2>
+                    <h3>劇場版 イナズマイレブン 新たなる英雄たちの序章</h3>
                 </div>
-                <p>这是第二篇帖子的内容。</p>
-                <div class="post-date">发布时间：2024-11-15</div>
+                <p>1话 / 2024年12月27日/电影</p>
+                <div class="post-date">更新时间时间：2024-11-16</div>
             </div>
         </div>
         <!-- 根据需要添加更多帖子 -->
@@ -265,13 +272,14 @@
     <div class="pagination" id="pagination"></div>
     <!-- 禁用分页按钮 -->
     <div class="disable-pagination">
-        <button id="disable-pagination-btn">禁用分页</button>
+        <button id="disable-pagination-btn">显示全部</button>
     </div>
     <!-- 右下角工具栏，包含返回顶部按钮 -->
     <div class="t-right-bar">
         <div class="t-bar-rocket" id="back-to-top" onClick="gotop()">返回顶部</div>
     </div>
     <!-- 右下角 end -->
+
     <script>
         // 搜索功能：根据输入框的值过滤帖子
         document.getElementById('search').addEventListener('input', function() {
@@ -339,11 +347,11 @@
             if (!paginationDisabled) {
                 posts.forEach(post => post.style.display = '');
                 document.getElementById('pagination').style.display = 'none';
-                this.textContent = '启用分页';
+                this.textContent = '分页显示';
             } else {
                 paginatePosts();
                 document.getElementById('pagination').style.display = 'flex';
-                this.textContent = '禁用分页';
+                this.textContent = '全部显示';
             }
             paginationDisabled = !paginationDisabled;
         });
@@ -353,20 +361,22 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 为每个帖子添加点击事件
+        // 为每个帖子添加点击事件，跳转到不同的指定链接
         document.querySelectorAll('.post').forEach(post => {
             post.addEventListener('click', function() {
-                const postId = post.getAttribute('data-id');
-                window.location.href = `post.html?id=${postId}`;
+                const link = post.getAttribute('data-link');
+                window.open(link, '_blank');
             });
         });
+
+
 
         // 页面加载时调用排序和分页函数
         sortPostsByDate();
         paginatePosts();
     </script>
-</body>
-</html>
-
+    <iframe scrolling=“no” framebordering='0' src="https://stay206.github.io/xinfan/2023/footer.html" width="100%"
+    onload="this.height=this.contentWindow.document.documentElement.scrollHeight">
+</iframe>
 </body>
 </html>
