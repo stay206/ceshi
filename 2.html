@@ -7,134 +7,120 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f4f4f4;
         }
 
         header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
         }
 
         header h1 {
             margin: 0;
-        }
-
-        header nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #333;
+            padding: 0;
+            flex: 1;
         }
 
         header input {
-            padding: 10px;
-            font-size: 16px;
-            width: 200px;
+            padding: 5px;
+            width: 80%;
+            max-width: 400px;
         }
 
-        main .hidden {
-            display: none;
+        main {
+            padding: 20px;
         }
 
-        main ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        main ul li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        main ul li:last-child {
-            border-bottom: none;
-        }
-
-        form {
+        .post {
             display: flex;
-            flex-direction: column;
+            align-items: flex-start;
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        form label {
-            margin: 5px 0;
+        .post img {
+            width: 130px;
+            height: 190px;
+            margin-right: 20px;
+            border-radius: 5px;
         }
 
-        form input {
+        .post-content {
+            flex: 1;
+        }
+
+        .post-date {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
             padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        form button {
-            padding: 10px;
+            margin: 0 5px;
+            border: none;
             background-color: #333;
             color: #fff;
-            border: none;
             cursor: pointer;
+        }
+
+        .pagination button.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>BBS Forum</h1>
-            <nav>
-                <a href="#" id="homeLink">Home</a>
-                <a href="#" id="loginLink">Login</a>
-                <a href="#" id="registerLink">Register</a>
-            </nav>
-            <input type="text" id="searchInput" placeholder="Search...">
-        </header>
-        <main>
-            <div id="homePage">
-                <ul id="postList">
-                    <li class="post">Post 1: Welcome to the forum!</li>
-                    <li class="post">Post 2: How to learn JavaScript?</li>
-                    <li class="post">Post 3: Share your favorite books</li>
-                    <li class="post">Post 4: Tips for CSS styling</li>
-                    <li class="post">Post 5: Frontend development resources</li>
-                </ul>
+    <header>
+        <h1>BBS Forum</h1>
+        <input type="text" id="search" placeholder="Search...">
+    </header>
+    <main id="posts-container">
+        <div class="post" data-title="First Post" data-date="2024-11-16">
+            <img src="https://via.placeholder.com/100" alt="Post Image">
+            <div class="post-content">
+                <h2>First Post</h2>
+                <p>This is the content of the first post.</p>
+                <div class="post-date">Published on: 2024-11-16</div>
             </div>
-            <div id="loginPage" class="hidden">
-                <h2>Login</h2>
-                <form id="loginForm">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                    <button type="submit">Login</button>
-                </form>
+        </div>
+        <div class="post" data-title="Second Post" data-date="2024-11-15">
+            <img src="https://via.placeholder.com/100" alt="Post Image">
+            <div class="post-content">
+                <h2>Second Post</h2>
+                <p>This is the content of the second post.</p>
+                <div class="post-date">Published on: 2024-11-15</div>
             </div>
-            <div id="registerPage" class="hidden">
-                <h2>Register</h2>
-                <form id="registerForm">
-                    <label for="newUsername">Username:</label>
-                    <input type="text" id="newUsername" name="newUsername" required>
-                    <label for="newPassword">Password:</label>
-                    <input type="password" id="newPassword" name="newPassword" required>
-                    <button type="submit">Register</button>
-                </form>
-            </div>
-        </main>
-    </div>
+        </div>
+        <!-- Add more posts as needed -->
+        
+    </main>
+    <div class="pagination" id="pagination"></div>
     <script>
-        document.getElementById('searchInput').addEventListener('keyup', function() {
+        document.getElementById('search').addEventListener('input', function() {
             let filter = this.value.toLowerCase();
-            let posts = document.querySelectorAll('#postList .post');
+            let posts = document.querySelectorAll('.post');
 
-            posts.forEach(function(post) {
-                let text = post.textContent.toLowerCase();
-                if (text.includes(filter)) {
+            posts.forEach(post => {
+                let title = post.getAttribute('data-title').toLowerCase();
+                if (title.includes(filter)) {
                     post.style.display = '';
                 } else {
                     post.style.display = 'none';
@@ -142,36 +128,47 @@
             });
         });
 
-        document.getElementById('homeLink').addEventListener('click', function() {
-            showPage('homePage');
-        });
+        function sortPostsByDate() {
+            let postsContainer = document.getElementById('posts-container');
+            let posts = Array.from(postsContainer.getElementsByClassName('post'));
 
-        document.getElementById('loginLink').addEventListener('click', function() {
-            showPage('loginPage');
-        });
-
-        document.getElementById('registerLink').addEventListener('click', function() {
-            showPage('registerPage');
-        });
-
-        function showPage(pageId) {
-            document.querySelectorAll('main > div').forEach(function(page) {
-                page.classList.add('hidden');
+            posts.sort((a, b) => {
+                let dateA = new Date(a.getAttribute('data-date'));
+                let dateB = new Date(b.getAttribute('data-date'));
+                return dateA - dateB;
             });
-            document.getElementById(pageId).classList.remove('hidden');
+
+            posts.forEach(post => postsContainer.appendChild(post));
         }
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Logged in!');
-            showPage('homePage');
-        });
+        function paginatePosts() {
+            const postsPerPage = 10;
+            const postsContainer = document.getElementById('posts-container');
+            const posts = Array.from(postsContainer.getElementsByClassName('post'));
+            const pagination = document.getElementById('pagination');
+            const totalPages = Math.ceil(posts.length / postsPerPage);
 
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Registered!');
-            showPage('homePage');
-        });
+            function showPage(page) {
+                posts.forEach((post, index) => {
+                    post.style.display = (index >= (page - 1) * postsPerPage && index < page * postsPerPage) ? '' : 'none';
+                });
+
+                pagination.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.classList.toggle('disabled', i === page);
+                    button.addEventListener('click', () => showPage(i));
+                    pagination.appendChild(button);
+                }
+            }
+
+            showPage(1);
+        }
+
+        // Call the functions to sort posts and paginate on page load
+        sortPostsByDate();
+        paginatePosts();
     </script>
 </body>
 </html>
