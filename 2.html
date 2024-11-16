@@ -237,7 +237,7 @@
     </header>
     <!-- 主要内容区域，包含帖子 -->
     <main id="posts-container">
-        <div class="post" data-title="第一篇帖子" data-date="2024-11-16">
+        <div class="post" data-title="第一篇帖子" data-date="2024-11-16" data-id="1">
             <img src="https://via.placeholder.com/100" alt="帖子图片">
             <div class="post-content">
                 <div class="post-title">
@@ -248,7 +248,7 @@
                 <div class="post-date">发布时间：2024-11-16</div>
             </div>
         </div>
-        <div class="post" data-title="妻、小学生になる。妻子变成小学生。" data-date="2024-11-15">
+        <div class="post" data-title="妻、小学生になる。妻子变成小学生。" data-date="2024-11-15" data-id="2">
             <img src="https://via.placeholder.com/100" alt="帖子图片">
             <div class="post-content">
                 <div class="post-title">
@@ -356,9 +356,8 @@
         // 为每个帖子添加点击事件
         document.querySelectorAll('.post').forEach(post => {
             post.addEventListener('click', function() {
-                alert('你点击了帖子：' + post.getAttribute('data-title'));
-                // 这里可以添加更多操作，例如跳转到帖子详情页
-                // window.location.href = '帖子详情页URL';
+                const postId = post.getAttribute('data-id');
+                window.location.href = `post.html?id=${postId}`;
             });
         });
 
@@ -366,5 +365,8 @@
         sortPostsByDate();
         paginatePosts();
     </script>
+</body>
+</html>
+
 </body>
 </html>
