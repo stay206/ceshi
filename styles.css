@@ -79,8 +79,8 @@ header input {
     width: 200px;
     border: none;
     border-radius: 5px;
-    position: relative;
-    left: -30px; /* 向左移动20px */
+    position:relative;
+    left: -30px; /* 使用margin-left代替position */
 }
 
 /* 设置主要内容区域样式，添加顶部填充以避免内容被头部遮挡 */
@@ -129,8 +129,8 @@ main {
 /* 设置帖子副标题样式 */
 .post-title h3 {
     margin: 0;
-    font-size: 0.8em;
-    color: #888;
+    font-size: 0.9em; /* 增加字体大小 */
+    color: #666; /* 调整颜色 */
 }
 
 /* 设置帖子发布日期样式 */
@@ -287,4 +287,9 @@ footer .copyright a {
 
 footer .copyright a:hover {
     color: #000; /* 鼠标移至时高亮字体 */
+}
+
+/* 隐藏帖子 */
+.hidden {
+    display: none;
 }

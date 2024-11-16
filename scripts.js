@@ -86,6 +86,30 @@ document.querySelectorAll('.post').forEach(post => {
     });
 });
 
+// 切换帖子显示和隐藏状态
+function togglePosts() {
+    let hiddenPosts = document.querySelectorAll('.post.hidden');
+    let tBarSupport = document.querySelector('.t-bar-support');
+
+    if (hiddenPosts.length > 0) {
+        // 显示隐藏的帖子
+        hiddenPosts.forEach(post => {
+            post.classList.remove('hidden');
+        });
+        tBarSupport.textContent = '隐藏';
+    } else {
+        // 隐藏原先隐藏的帖子
+        let posts = document.querySelectorAll('.post');
+        posts.forEach(post => {
+            if (post.getAttribute('data-link').startsWith('hidden')) {
+                post.classList.add('hidden');
+            }
+        });
+        tBarSupport.textContent = '显示';
+    }
+}
+
+
 // 页面加载时调用排序和分页函数
 sortPostsByDate();
 paginatePosts();
