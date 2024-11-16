@@ -13,11 +13,20 @@
         }
 
         header {
+            background: linear-gradient(270deg, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             color: #fff;
             padding: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         header h1 {
@@ -185,7 +194,7 @@
     </style>
 </head>
 <body>
-    <header id="header">
+    <header>
         <h1>论坛</h1>
         <nav>
             <a href="#home" class="active">首页</a>
@@ -229,32 +238,6 @@
     </div>
     <!-- 右下角 end -->
     <script>
-        // 生成随机颜色
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        // 设置随机渐变背景
-        function setRandomGradient(element) {
-            const color1 = getRandomColor();
-            const color2 = getRandomColor();
-            const color3 = getRandomColor();
-            element.style.background = `linear-gradient(270deg, ${color1}, ${color2}, ${color3})`;
-            element.style.backgroundSize = '400% 400%';
-            element.style.animation = 'gradient 15s ease infinite';
-        }
-
-        // 初始化随机渐变背景
-        function initRandomGradient() {
-            const header = document.getElementById('header');
-            setRandomGradient(header);
-        }
-
         // 搜索功能：根据输入框的值过滤帖子
         document.getElementById('search').addEventListener('input', function() {
             let filter = this.value.toLowerCase();
@@ -288,7 +271,6 @@
         function paginatePosts() {
             const postsPerPage = 10;
             const postsContainer = document.getElementById('posts-container');
-            const posts = Array.from(postsContainer.get            const postsContainer = document.getElementById('posts-container');
             const posts = Array.from(postsContainer.getElementsByClassName('post'));
             const pagination = document.getElementById('pagination');
             const totalPages = Math.ceil(posts.length / postsPerPage);
@@ -339,7 +321,6 @@
         // 页面加载时调用排序和分页函数
         sortPostsByDate();
         paginatePosts();
-        initRandomGradient();
     </script>
 </body>
 </html>
