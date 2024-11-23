@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小说阅读器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #FAF0E6;
+            /* 背景颜色改为米色 */
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-indent: 2em;
+            margin-bottom: 20px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .illustration {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .illustration img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 20px;
+        }
+
+        .menu-content {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            background: white;
+            border-right: 1px solid #ddd;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 10px;
+            color: #007BFF;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-content a:hover {
+            background: #f4f4f4;
+        }
+
+        .close-menu {
+            text-align: right;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .chapter-navigation a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+
+<body onclick="toggleNavBar(event)">
+    <h1 id="novelTitle" style="display:none;">只是和你恋爱，应该不会改变什么</h1>
+    <div class="chapter" id="chapter1">
+        <h2>插图</h2>
+        <p>本作品采用直行版式设计。</p>
+        <p>另外，根据您所使用的阅读设备，显示效果可能会有差异。</p>
+        <p>部分汉字可能会以简体字显示。</p>
+        <p>封面插画：U35</p>
+        <p>封面设计：菊池　祐（Layla）</p>
+        <p>翻译：吧友<a
+                href="https://tieba.baidu.com/home/main?id=tb.1.2f5e15a7.5fEO-NYqj9LtotDlMK5aZg?t=1580636632&fr=pb">@hubaijia1</a>
+        </p>
+        <p>整理排版：<a href="https://stay206.github.io/portfolio-master/portfolio.html">墨云</a></p>
+        <p>插图来源：书友<a href="https://www.wenku8.net/userpage.php?uid=1414951">@3298118397</a></p>
+        <div class="illustration">
+            <img src="1.jpg" alt="">
+            <img src="2.jpg" alt="">
+            <img src="3.jpg" alt="">
+            <img src="4.jpg" alt="">
+            <img src="5.jpg" alt="">
+        </div>
+        
+        <div class="chapter-navigation">
+            <span></span> <!-- 占位符，用于占据空间 -->
+            <a href="#" onclick="nextChapter(event)">下一章</a>
+        </div>
+    </div>
+    <div class="chapter" id="chapter2" style="display:none;">
+        <div class="illustration">
+            <img src="6.jpg" alt="">
+        </div>
+        <h2>序章 • Ups and Downs「上上下下」</h2>
+        <p>「啊——果然还是大房间比较好啊！」</p>
+        <p>家具和小物件大致上整理得差不多了，她放松地呼出一口气。</p>
+
+        <p>其实，在三月下旬刚搬过来的时候，自己是住在同住者的最上层的。然后在五月份的长假过去的时候，突然天花板的一块地板发生了漏雨现象。向物业管理公司问了一下，说是马上修复会很困难，「同一建筑还有其他楼层有空的房间，可以请你先搬到那边吗？」提出了这样的建议。虽然确实有点麻烦，但是位于转角处的房间会更大一些，搬家所花的费用也被物业全部承担，「我知道了，这问题」就这样答应了。
+        </p>
+
+        <p>搬过去的房间是一室一厅一厨的布局，比起之前的单人房要大了不少。租金也是，本来是要比之前的房间贵5000日元的，因为特殊情况就按之前的价格来给了。现在开始到大学结束大概会一直住在这个房间，长远来看说不定自己还算碰上好运了呢。</p>
+        
+
+        <p>重新巡视了一遍成为了自己新的据点的房间， 家具和电器都采取了白色的基调。虽然说不上对老家的生活不满，但在这样摆满自己喜欢的东西的房间里，舒适感实在是爆表。</p>
+
+        <p>纵身一跃到「以触感良好为理念」的床单上，在床上滚动着放松身心的时候，放在枕边的手机震动了起来。</p>
+
+        <p>是从初中时期的朋友建立起来的小群发来的消息。内容基本上是闲聊和散讲近况。在群里，有一个把头像换成「樱花枝」的女生，其他人纷纷问她「是在哪里拍到的」。</p>
+        <p>「huima：是在角馆（日本秋田地名）哦！长假期间去的。虽然去的路上费了不少功夫，但真的非常非常漂亮哦！」</p>
+
+        <p>是huima发的话……大概那个眼镜男也是一起去的吧？既然是她发的，明明就完全没有必要去问「和谁一起」的。她连当时发了一个「真好啊」的表情包，就把手机收起来，把头埋进了枕头。</p>
+
+        <p>全新的街区，全新的学校，全新的环境。也交到了朋友，上课也还挺开心的。但还是会觉得有一点寂寞，好像哪里还不够完美一样。这样的话，应该并不是乡愁。</p>
+
+        <p>「啊啊，真不错啊……」</p>
+
+        <p>嘴巴擅自嘟囔了起来。意识到这玩意不过是自己的真实想法，她因为羞耻扭起了身子。</p>
+
+        <p>不过，如果自己也能碰上足以珍藏的邂逅的话——</p>
+
+        <p>想要逃脱而充满不安，这样的初夏的夜晚，意料之外的不可思议的情感不断发芽，无法抗拒。</p>
+
+        <p>来到这个热爱和平的街区的她，悄悄地，但又强烈地泛起对未来的期待，在这样的情绪下慢慢地闭上了眼睛。</p>
+
+        <div class="chapter-navigation">
+            <a href="#" onclick="prevChapter(event)">上一章</a>
+            <a href="#" onclick="nextChapter(event)">下一章</a>
+        </div>
+    </div>
+    <div class="chapter" id="chapter3" style="display:none;">
+        <h2>「剧本」
+            「小天然与小傲娇」第1话「与命运之人的相遇法」
+        </h2>
+        <div class="illustration">
+            <img src="7.jpg" alt="">
+            <img src="8.jpg" alt="">
+            <img src="9.jpg" alt="">
+            <img src="10.jpg" alt="">
+            <img src="11.jpg" alt="">
+        </div>
+        <div class="chapter-navigation">
+            <a href="#" onclick="prevChapter(event)">上一章</a>
+            <a href="#" onclick="nextChapter(event)">下一章</a>
+        </div>
+    </div>
+    <!-- 可以继续添加更多章节 -->
+    <div class="bottom-nav" id="bottomNav">
+        <a href="#" onclick="prevChapter(event)">上一章</a>
+        <a href="#" onclick="toggleMenu(event)">目录</a>
+        <a href="#" onclick="nextChapter(event)">下一章</a>
+    </div>
+    <div class="menu-content" id="menuContent">
+        <div class="close-menu" onclick="toggleMenu(event)">关闭</div>
+        <a href="#" onclick="showChapter(1, event)">插图</a>
+        <a href="#" onclick="showChapter(2, event)">序章 • Ups and Downs「上上下下」</a>
+        <a href="#" onclick="showChapter(3, event)">「剧本」「小天然与小傲娇」第1话「与命运之人的相遇法」</a>
+        <!-- 可以继续添加更多目录项 -->
+    </div>
+    <script>
+        let currentChapter = 1;
+
+        function toggleMenu(event) {
+            event.stopPropagation();
+            const menuContent = document.getElementById('menuContent');
+            menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleNavBar(event) {
+            if (event.target.closest('.bottom-nav') || event.target.closest('.menu-content')) {
+                return;
+            }
+            const bottomNav = document.getElementById('bottomNav');
+            if (bottomNav.style.display === 'block') {
+                bottomNav.style.display = 'none';
+            } else {
+                bottomNav.style.display = 'block';
+                clearTimeout(window.navTimeout);
+                window.navTimeout = setTimeout(() => {
+                    bottomNav.style.display = 'none';
+                }, 10000);
+            }
+        }
+
+        function showChapter(chapter, event) {
+            event.stopPropagation();
+            document.querySelectorAll('.chapter').forEach((el) => {
+                el.style.display = 'none';
+            });
+            document.getElementById(`chapter${chapter}`).style.display = 'block';
+            currentChapter = chapter;
+            const menuContent = document.getElementById('menuContent');
+            menuContent.style.display = 'none';
+        }
+
+        function prevChapter(event) {
+            event.stopPropagation();
+            if (currentChapter > 1) {
+                showChapter(currentChapter - 1, event);
+            }
+        }
+
+        function nextChapter(event) {
+            event.stopPropagation();
+            if (document.getElementById(`chapter${currentChapter + 1}`)) {
+                showChapter(currentChapter + 1, event);
+            }
+        }
+    </script>
+</body>
+
+</html>
